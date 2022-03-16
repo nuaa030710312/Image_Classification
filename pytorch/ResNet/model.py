@@ -12,7 +12,6 @@ class BasicBlock(nn.Module):
 
         self.conv2=nn.Conv2d(out_channel,out_channel,kernel_size=3,stride=1,padding=1,bias=False)
         self.bn2=nn.BatchNorm2d(out_channel)
-
         self.downsample=downsample
 
     def forward(self,x):
@@ -29,10 +28,10 @@ class BasicBlock(nn.Module):
         out=self.relu(out)
         return out
 
-class Botleneck(nn.Module):
+class Bottleneck(nn.Module):
     expansion=4
     def __init__(self,in_channel,out_channel,stride=1,downsample=None):
-        super(Botleneck, self).__init__()
+        super(Bottleneck, self).__init__()
         self.conv1=nn.Conv2d(in_channels=in_channel,out_channels=out_channel,kernel_size=1,stride=1,bias=False)
         self.bn1=nn.BatchNorm2d(out_channel)
 
@@ -122,3 +121,15 @@ class ResNet(nn.Module):
             x=self.fc(x)
 
         return x
+
+def ResNet34(num_classes=1000,include_top=True):
+    return ResNet(BasicBlock,[3,4,6,3],num_classes=num_classes,include_top=include_top)
+
+def resnet50(num_classes=1000, include_top=True):
+    return ResNet(Bottleneck, [3, 4, 6, 3], num_classes=num_classes, include_top=include_top)
+
+def resnet101(num_classes=1000, include_top=True):
+    return ResNet(Bottleneck, [3, 4, 23, 3], num_classes=num_classes, include_top=include_top)
+
+def resnet152(num_classes=1000, include_top=True):
+    return ResNet(Bottleneck, [3, 8, 36, 3], num_classes=num_classes, include_top=include_top)
