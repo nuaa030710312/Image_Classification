@@ -18,7 +18,7 @@ class InvertedResidual(nn.Module):
 
         layers=[]
         if expand_ratio!=1:
-            layers.append(ConvBnRelu(in_channle,out_channle,kernel_size=1))
+            layers.append(ConvBnRelu(in_channle,hidden_channel,kernel_size=1))
         layers.extend([
             ConvBnRelu(hidden_channel,hidden_channel,stride=stride,groups=hidden_channel),
             nn.Conv2d(hidden_channel,out_channle,kernel_size=1,bias=False),
