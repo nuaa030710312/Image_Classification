@@ -25,7 +25,7 @@ def main():
                                    transforms.ToTensor(),
                                    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])])}
 
-    data_root = os.path.abspath(os.path.join(os.getcwd(), "../.."))  # get data root path
+    data_root = os.path.abspath(os.path.join(os.getcwd(), "../AlexNet"))  # get data root path
     image_path = os.path.join(data_root, "data_set", "flower_data")  # flower data set path
     assert os.path.exists(image_path), "{} path does not exist.".format(image_path)
     train_dataset = datasets.ImageFolder(root=os.path.join(image_path, "train"),
@@ -59,6 +59,7 @@ def main():
                                                                            val_num))
 
     net = ResNet34()
+    #print(net)
     # load pretrain weights
     # download url: https://download.pytorch.org/models/resnet34-333f7ec4.pth
     model_weight_path = "./resnet34-pre.pth"
@@ -79,7 +80,7 @@ def main():
     params = [p for p in net.parameters() if p.requires_grad]
     optimizer = optim.Adam(params, lr=0.0001)
 
-    epochs = 3
+    epochs = 1
     best_acc = 0.0
     save_path = './resNet34.pth'
     train_steps = len(train_loader)

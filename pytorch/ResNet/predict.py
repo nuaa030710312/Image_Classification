@@ -19,7 +19,7 @@ def main():
          transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])])
 
     # load image
-    img_path = "../tulip.jpg"
+    img_path = "../AlexNet/flower.jpeg"
     assert os.path.exists(img_path), "file: '{}' dose not exist.".format(img_path)
     img = Image.open(img_path)
     plt.imshow(img)
@@ -36,7 +36,7 @@ def main():
     class_indict = json.load(json_file)
 
     # create model
-    model = resnet34(num_classes=5).to(device)
+    model = ResNet34(num_classes=5).to(device)
 
     # load model weights
     weights_path = "./resNet34.pth"

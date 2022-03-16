@@ -112,12 +112,12 @@ class ResNet(nn.Module):
 
         x=self.layer1(x)
         x=self.layer2(x)
-        x-self.layer3(x)
+        x=self.layer3(x)
         x=self.layer4(x)
 
         if self.include_top:
             x=self.avgpool(x)
-            x=torch.flatten(x)
+            x=torch.flatten(x,1)
             x=self.fc(x)
 
         return x
