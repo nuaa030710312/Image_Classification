@@ -5,12 +5,12 @@ from torch import Tensor
 from typing import List,Callable
 
 def channel_shuffle(x:Tensor,groups:int):
-    batch_size,num_channels,height,weight=x.size()
+    batch_size,num_channels,height,width=x.size()
 
     channels_per_group=num_channels//groups
-    x=x.view(batch_size,groups,channels_per_group,height,weight)
+    x=x.view(batch_size,groups,channels_per_group,height,width)
     x=torch.transpose(x,1,2).contiguous()
-    x=x.view(batch_size,-1,height,weight)
+    x=x.view(batch_size,-1,height,width)
     return x
 
 class InvertedResidual(nn.Module):
