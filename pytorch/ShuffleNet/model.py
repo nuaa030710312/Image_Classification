@@ -11,6 +11,7 @@ def channel_shuffle(x:Tensor,groups:int):
     x=x.view(batch_size,groups,channels_per_group,height,weight)
     x=torch.transpose(x,1,2).contiguous()
     x=x.view(batch_size,-1,height,weight)
+    return x
 
 class InvertedResidual(nn.Module):
     def __init__(self,input_c:int,output_c:int,stride:int):
